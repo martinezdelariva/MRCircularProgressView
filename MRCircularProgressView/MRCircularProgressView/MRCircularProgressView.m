@@ -55,6 +55,7 @@
 - (void)setUp
 {
     // Init variables
+    self.delegate = nil;
     self.currentProgress = 0.0f;
     self.lastProgress = 0.0f;
     self.animated = YES;
@@ -142,6 +143,7 @@
 
         // Animation
         CABasicAnimation *pathAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
+        pathAnimation.delegate = self.delegate;
         pathAnimation.duration = self.duration;
         pathAnimation.fromValue = @(fromValue);
         pathAnimation.toValue = @(1.0f);
