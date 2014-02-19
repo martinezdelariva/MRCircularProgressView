@@ -28,6 +28,10 @@
 #import <UIKit/UIKit.h>
 
 @interface MRCircularProgressView : UIView
+
+// Set delegate to allow callbacks (animataionDidFinish, etc)
+@property(strong, nonatomic) id delegate;
+
 // Color of wrapper circle and progress arc.
 @property(strong, nonatomic) UIColor *progressColor;
 

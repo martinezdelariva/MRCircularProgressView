@@ -23,9 +23,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
     
     // CircularProgressViews
+    self.circularProgressView.delegate = self;
     self.circularProgressView.progressColor = self.view.tintColor;
     self.autoCircularProgressView.progressColor = [UIColor redColor];
     self.autoCircularProgressView.progressArcWidth = 10.5f;
@@ -34,11 +34,8 @@
     self.currentProgress = 0.0f;
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+#pragma mark - Actions
+
 - (IBAction)tappedReset:(id)sender
 {
     self.currentProgress = 0.0f;
@@ -63,6 +60,18 @@
 - (IBAction)tappedAutoReset:(id)sender
 {
     [self.autoCircularProgressView setProgress:0.0f animated:YES];
+}
+
+#pragma mark - CABasicAnimationDelegate
+
+- (void)animationDidStart:(CAAnimation *)theAnimation
+{
+    NSLog(@"Animation started");
+}
+
+- (void)animationDidStop:(CAAnimation *)theAnimation finished:(BOOL)flag
+{
+    NSLog(@"Animation stopped");
 }
 
 @end
