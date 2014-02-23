@@ -170,4 +170,21 @@
     [self setProgress:progress animated:YES];
 }
 
+-(void)pause
+{
+    CFTimeInterval pausedTime = [self.shapeLayer convertTime:CACurrentMediaTime() fromLayer:nil];
+    self.shapeLayer.speed = 0.0;
+    self.shapeLayer.timeOffset = pausedTime;
+}
+
+-(void)resume
+{
+    CFTimeInterval pausedTime = [self.shapeLayer timeOffset];
+    self.shapeLayer.speed = 1.0;
+    self.shapeLayer.timeOffset = 0.0;
+    self.shapeLayer.beginTime = 0.0;
+    CFTimeInterval timeSincePause = [self.shapeLayer convertTime:CACurrentMediaTime() fromLayer:nil] - pausedTime;
+    self.shapeLayer.beginTime = timeSincePause;
+}
+
 @end

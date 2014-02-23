@@ -55,7 +55,7 @@
 
 - (IBAction)tappedAuto:(id)sender
 {
-    [self.autoCircularProgressView setProgress:1.0f duration:1];
+    [self.autoCircularProgressView setProgress:1.0f duration:30];
 }
 - (IBAction)tappedAutoReset:(id)sender
 {
@@ -74,4 +74,12 @@
     NSLog(@"Animation stopped");
 }
 
+- (IBAction)pauseAnimation:(id)sender {
+    
+    [ self.autoCircularProgressView pause];
+}
+
+- (IBAction)resumeAnimation:(id)sender {
+    [self.autoCircularProgressView resume];
+}
 @end
