@@ -123,6 +123,7 @@
         _shapeLayer.lineWidth = self.progressArcWidth;
         _shapeLayer.fillColor = nil;
         _shapeLayer.lineJoin = kCALineJoinBevel;
+        _shapeLayer.speed=1.0f;
         [self.layer addSublayer:_shapeLayer];
     }
     
@@ -160,31 +161,45 @@
 {
     self.currentProgress = MAX(MIN(progress, 1.0f), 0.0f);
     self.animated = animate;
-    
+    if (progress==0.0) {
+        //means reset been tapped
+        self.shapeLayer.speed=1;
+        
+    }
     [self setNeedsLayout];
 }
 
 - (void)setProgress:(CGFloat)progress duration:(CFTimeInterval)duration
 {
+
     self.duration = duration;
     [self setProgress:progress animated:YES];
 }
 
+#pragma mark pause/resume
 -(void)pause
 {
-    CFTimeInterval pausedTime = [self.shapeLayer convertTime:CACurrentMediaTime() fromLayer:nil];
-    self.shapeLayer.speed = 0.0;
-    self.shapeLayer.timeOffset = pausedTime;
+    
+
+     if (self.currentProgress !=0) {
+        CFTimeInterval pausedTime = [self.shapeLayer convertTime:CACurrentMediaTime() fromLayer:nil];
+        self.shapeLayer.speed = 0.0;
+        self.shapeLayer.timeOffset = pausedTime;
+     } 
+    
 }
 
 -(void)resume
 {
-    CFTimeInterval pausedTime = [self.shapeLayer timeOffset];
-    self.shapeLayer.speed = 1.0;
-    self.shapeLayer.timeOffset = 0.0;
-    self.shapeLayer.beginTime = 0.0;
-    CFTimeInterval timeSincePause = [self.shapeLayer convertTime:CACurrentMediaTime() fromLayer:nil] - pausedTime;
-    self.shapeLayer.beginTime = timeSincePause;
+    if (self.shapeLayer.speed==0) {
+        CFTimeInterval pausedTime = [self.shapeLayer timeOffset];
+        self.shapeLayer.speed = 1.0;
+        self.shapeLayer.timeOffset = 0.0;
+        self.shapeLayer.beginTime = 0.0;
+        CFTimeInterval timeSincePause = [self.shapeLayer convertTime:CACurrentMediaTime() fromLayer:nil] - pausedTime;
+        self.shapeLayer.beginTime = timeSincePause;
+    }
+    
 }
 
 @end
