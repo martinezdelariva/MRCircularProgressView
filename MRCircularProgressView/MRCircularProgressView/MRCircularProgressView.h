@@ -44,4 +44,7 @@
 // Set new progress (0.0f - 1.0f) animated with custom duration
 - (void)setProgress:(CGFloat)progress duration:(CFTimeInterval)duration;
 
+-(void)pause;
+
+-(void)resume;
 @end

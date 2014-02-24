@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface MRViewController : UIViewController
+- (IBAction)pauseAnimation:(id)sender;
+- (IBAction)resumeAnimation:(id)sender;
 
 @end
