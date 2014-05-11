@@ -126,7 +126,8 @@
         _shapeLayer.speed=1.0f;
         [self.layer addSublayer:_shapeLayer];
     }
-    
+    _shapeLayer.strokeColor = self.progressColor.CGColor;
+
     return _shapeLayer;
 }
 
