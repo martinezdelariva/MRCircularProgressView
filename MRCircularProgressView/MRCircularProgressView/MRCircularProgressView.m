@@ -119,13 +119,14 @@
 {
     if (!_shapeLayer) {
         _shapeLayer = [CAShapeLayer layer];
-        _shapeLayer.strokeColor = self.progressColor.CGColor;
         _shapeLayer.lineWidth = self.progressArcWidth;
         _shapeLayer.fillColor = nil;
         _shapeLayer.lineJoin = kCALineJoinBevel;
         _shapeLayer.speed=1.0f;
         [self.layer addSublayer:_shapeLayer];
     }
+    
+    // This will allow the color to be change in the middle of the duration period
     _shapeLayer.strokeColor = self.progressColor.CGColor;
 
     return _shapeLayer;
