@@ -30,13 +30,19 @@
 @interface MRCircularProgressView : UIView
 
 // Set delegate to allow callbacks (animataionDidFinish, etc)
-@property(strong, nonatomic) id delegate;
+@property (strong, nonatomic) id delegate;
 
-// Color of wrapper circle and progress arc.
-@property(strong, nonatomic) UIColor *progressColor;
+// Color of the progress arc
+@property (strong, nonatomic) UIColor *progressColor;
 
 // Width of progress arc
 @property (assign, nonatomic) CGFloat progressArcWidth;
+
+// Width of wrapper arc
+@property (assign, nonatomic) CGFloat wrapperArcWidth;
+
+// Color of wrapper arc
+@property (strong, nonatomic) UIColor *wrapperColor;
 
 // Set new progress (0.0f - 1.0f) with animation option
 - (void)setProgress:(CGFloat)progress animated:(BOOL)animate;

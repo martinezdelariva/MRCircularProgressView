@@ -60,15 +60,17 @@
     self.lastProgress = 0.0f;
     self.animated = YES;
     self.progressColor = [UIColor blueColor];
+    self.wrapperColor = self.progressColor;
     self.duration = 0.5;
     self.progressArcWidth = 3.0f;
+    self.wrapperArcWidth = 1.f;
 }
 
 - (void)drawRect:(CGRect)rect
 {
     // Outer circle
     CGRect newRect = ({
-        CGRect insetRect = CGRectInset(rect, 1.5f, 1.5f);
+        CGRect insetRect = CGRectInset(rect, self.wrapperArcWidth + 0.5f, self.wrapperArcWidth + 0.5f);
         CGRect newRect = insetRect;
         newRect.size.width = MIN(CGRectGetMaxX(insetRect), CGRectGetMaxY(insetRect));
         newRect.size.height = newRect.size.width;
@@ -77,8 +79,8 @@
         newRect;
     });
     UIBezierPath *outerCircle = [UIBezierPath bezierPathWithOvalInRect:newRect];
-    [self.progressColor setStroke];
-    outerCircle.lineWidth = 1;
+    [self.wrapperColor setStroke];
+    outerCircle.lineWidth = self.wrapperArcWidth;
     [outerCircle stroke];
 }
 
