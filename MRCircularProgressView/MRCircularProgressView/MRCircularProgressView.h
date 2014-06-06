@@ -30,7 +30,7 @@
 @interface MRCircularProgressView : UIView
 
 // Set delegate to allow callbacks (animataionDidFinish, etc)
-@property (strong, nonatomic) id delegate;
+@property (weak, nonatomic) id delegate;
 
 // Color of the progress arc
 @property (strong, nonatomic) UIColor *progressColor;
